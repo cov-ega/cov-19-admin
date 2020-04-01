@@ -19,7 +19,7 @@ export class AppComponent {
       if (value === true) {
         this.navbar = {
           logo: '../assets/covid-logo.png',
-          menu: [{name: '/dashboard', icon: 'home'}, {name: '/map', icon: 'supervisor_account'}, {name: '/graph', icon: 'person'}],
+          menu: [{name: '/dashboard', icon: 'dashboard'}, {name: '/map', icon: 'place'}, {name: '/graph', icon: 'supervisor_account'}],
           rightButtons: [],
         };
       } else {
