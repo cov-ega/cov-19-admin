@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AuthService} from './core/services/auth.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'covid19-admin';
+  title = 'covid19';
+  navbar: any;
+
+  constructor(public authService: AuthService) {
+    this.initialize();
+  }
+  initialize() {
+    this.authService.isLoggedIn().subscribe(value => {
+      if (value === true) {
+        this.navbar = {
+          logo: '../assets/covid-logo.png',
+          menu: [{name: '/user/dashboard', icon: 'home'}, {name: '/user/connection', icon: 'supervisor_account'}, {name: '/user/profile', icon: 'person'}],
+          rightButtons: [],
+        };
+      } else {
+        this.navbar = {
+          logo: '../assets/covid-logo.png',
+          menu: [],
+          rightButtons: [{name: 'login', color: 'primary', type: 'raised'}],
+        };
+      }
+    });
+  }
+
+
+  removeLocal() {
+    this.authService.logout();
+  }
 }
